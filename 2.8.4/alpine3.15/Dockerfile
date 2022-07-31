@@ -23,10 +23,11 @@ RUN set -eux; \
 	mv "nats-server-v${NATS_SERVER}-linux-${natsArch}/nats-server" /usr/local/bin; \
 	rm -rf "nats-server-v${NATS_SERVER}-linux-${natsArch}";
 
-COPY nats-server3.conf /etc/nats/nats-server1.conf
-COPY nats-server3.conf /etc/nats/nats-server2.conf
+COPY nats-server1.conf /etc/nats/nats-server1.conf
+COPY nats-server2.conf /etc/nats/nats-server2.conf
 COPY nats-server3.conf /etc/nats/nats-server3.conf
+COPY nats-simple.conf /etc/nats/nats-simple.conf
 COPY docker-entrypoint.sh /usr/local/bin
-EXPOSE 4222 4223 4224 8222 6222
+EXPOSE 4222 8222 6222 443
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["nats-server", "--config", "/etc/nats/nats-server1.conf"]
+CMD ["nats-server", "--config", "/etc/nats/nats-simple.conf"]
